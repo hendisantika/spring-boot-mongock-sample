@@ -36,7 +36,7 @@
         <dependency>
             <groupId>io.mongock</groupId>
             <artifactId>mongock-springboot-v3</artifactId>
-            <version>5.2.4</version>
+            <version>5.5.0</version>
         </dependency>
         <!-- MONGODB DRIVER -->
         <dependency>
