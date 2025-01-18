@@ -13,18 +13,33 @@
 // 20250119060234
 // http://localhost:8080/api/customers
 
+// 20250119061735
+// http://localhost:8080/api/customers
+
 [
   {
-    "id": "678c32c9db881419b18043c4",
-    "name": "Madhura"
+    "id": "678c33ef69d4e2030664de4c",
+    "name": "Yuji"
   },
   {
-    "id": "678c32c9db881419b18043c5",
-    "name": "Josh"
+    "id": "678c33ef69d4e2030664de4d",
+    "name": "Megumi"
   },
   {
-    "id": "678c32c9db881419b18043c6",
-    "name": "Olga"
+    "id": "678c33ef69d4e2030664de4e",
+    "name": "Nobara"
+  },
+  {
+    "id": "678c33ef69d4e2030664de4f",
+    "name": "Gojo"
+  },
+  {
+    "id": "678c33ef69d4e2030664de50",
+    "name": "Geto"
+  },
+  {
+    "id": "678c33ef69d4e2030664de51",
+    "name": "Sukuna"
   }
 ]
 ```
