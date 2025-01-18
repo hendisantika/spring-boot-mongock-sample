@@ -2,6 +2,7 @@ package id.my.hendisantika.mongock.migration;
 
 import io.mongock.api.annotations.BeforeExecution;
 import io.mongock.api.annotations.ChangeUnit;
+import io.mongock.api.annotations.RollbackBeforeExecution;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -21,5 +22,10 @@ public class CustomerInitialization {
     @BeforeExecution
     public void beforeExecution(MongoTemplate mongoTemplate) {
         log.info("######### BeforeExecution!!!");
+    }
+
+    @RollbackBeforeExecution
+    public void rollbackBeforeExecution(MongoTemplate mongoTemplate) {
+        log.info("######### RollbackBeforeExecution!!!");
     }
 }
