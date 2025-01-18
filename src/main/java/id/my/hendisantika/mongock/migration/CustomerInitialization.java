@@ -6,6 +6,7 @@ import io.mongock.api.annotations.BeforeExecution;
 import io.mongock.api.annotations.ChangeUnit;
 import io.mongock.api.annotations.Execution;
 import io.mongock.api.annotations.RollbackBeforeExecution;
+import io.mongock.api.annotations.RollbackExecution;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -43,5 +44,11 @@ public class CustomerInitialization {
                 .map(repository::save)
                 .toList();
         log.info(customerFlux);
+    }
+
+    @RollbackExecution
+    public void rollbackExecution(CustomerRepository repository) {
+        log.info("######### BEFORE RollbackExecution!!!");
+        repository.deleteAll();
     }
 }
