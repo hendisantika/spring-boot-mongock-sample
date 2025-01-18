@@ -1,7 +1,7 @@
 services:
   mongodb:
     image: mongo:8.0.4
-    container_name: mongodb80
+    container_name: mongodb804
     ports:
       - "27017:27017"
     environment:

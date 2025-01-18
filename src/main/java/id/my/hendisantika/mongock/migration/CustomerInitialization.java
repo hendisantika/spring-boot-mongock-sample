@@ -39,7 +39,7 @@ public class CustomerInitialization {
     @Execution
     public void execution(CustomerRepository repository) {
         log.info("######### Initialize data!!!");
-        List<Customer> customerFlux = Arrays.asList("Madhura", "Josh", "Olga").stream()
+        List<Customer> customerFlux = Arrays.asList("Yuji", "Megumi", "Nobara", "Gojo", "Geto", "Sukuna").stream()
                 .map(Customer::new)
                 .map(repository::save)
                 .toList();
