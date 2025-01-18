@@ -1,7 +1,9 @@
 package id.my.hendisantika.mongock.migration;
 
+import io.mongock.api.annotations.BeforeExecution;
 import io.mongock.api.annotations.ChangeUnit;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,4 +18,8 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @ChangeUnit(id = "customer-initializer", order = "001", author = "myself")
 public class CustomerInitialization {
+    @BeforeExecution
+    public void beforeExecution(MongoTemplate mongoTemplate) {
+        log.info("######### BeforeExecution!!!");
+    }
 }
