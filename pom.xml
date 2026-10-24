@@ -14,7 +14,7 @@
     <name>spring-boot-mongock-sample</name>
     <description>spring-boot-mongock-sample</description>
     <properties>
-        <java.version>23</java.version>
+        <java.version>25</java.version>
         <lombok.version>1.18.48</lombok.version>
     </properties>
     <dependencies>
