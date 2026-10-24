@@ -1,13 +1,74 @@
 # spring-boot-mongock-sample
 
+[![Java CI with Maven](https://github.com/hendisantika/spring-boot-mongock-sample/actions/workflows/maven.yml/badge.svg)](https://github.com/hendisantika/spring-boot-mongock-sample/actions/workflows/maven.yml)
+![Java](https://img.shields.io/badge/Java-25-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-6DB33F?logo=springboot)
+![Mongock](https://img.shields.io/badge/Mongock-5.5.1-47A248?logo=mongodb)
+![Dependabot](https://img.shields.io/badge/Dependabot-enabled-025E8C?logo=dependabot)
+
+Sample Spring Boot application that uses [Mongock](https://mongock.io/) to run versioned MongoDB data migrations
+(change units) on startup. The `customer-initializer` change unit seeds a few customers that are exposed through a
+REST endpoint.
+
+## Tech Stack
+
+| Component       | Version                                       |
+|-----------------|-----------------------------------------------|
+| Java (JDK)      | 25 (Temurin in CI)                            |
+| Spring Boot     | 4.1.1                                         |
+| Mongock         | 5.5.1 (`mongock-springboot-v3`, Spring Data v4 driver) |
+| MongoDB         | 8.0.4 (Docker Compose / Testcontainers)       |
+| Testcontainers  | 2.x (managed by Spring Boot)                  |
+| Build tool      | Maven Wrapper (`./mvnw`)                      |
+
+## Prerequisites
+
+- JDK 25
+- Docker (running) — used by Spring Boot Docker Compose support at runtime and Testcontainers in tests
+
+## Project Structure
+
+```
+src/main/java/id/my/hendisantika/mongock
+├── SpringBootMongockSampleApplication.java
+├── customer/                     # Customer document, repository, service & REST controller
+└── migration/
+    └── CustomerInitialization.java   # Mongock @ChangeUnit (id: customer-initializer, order: 001)
+src/test/java/id/my/hendisantika/mongock
+└── SpringBootMongockSampleApplicationTests.java  # Testcontainers MongoDB + @ServiceConnection
+```
+
 ### Things todo list
 
 1. Clone this repository: `git clone https://github.com/hendisantika/spring-boot-mongock-sample.git`
 2. Navigate to the folder: `cd spring-boot-mongock-sample`
 3. Make sure your docker is UP n RUNNING
-4. Run the application: `mvn clean spring-boot:run`
+4. Run the application: `./mvnw clean spring-boot:run` (MongoDB from `compose.yaml` is started automatically)
 5. Open your favorite browser: http://localhost:8080/api/customers
 6. Check your console log
+
+## Running Tests
+
+```shell
+./mvnw clean verify
+```
+
+The integration test starts a `mongo:8.0.4` container via Testcontainers, wires it with `@ServiceConnection`, and
+asserts that the Mongock change unit seeded the customers collection.
+
+## CI/CD & Dependency Management
+
+- **GitHub Actions** (`.github/workflows/maven.yml`): builds and tests on JDK 25 (Temurin) for every push and pull
+  request to `main`. On pushes to `main` a separate job submits the Maven dependency graph to GitHub so Dependabot
+  alerts are accurate.
+- **Dependabot** (`.github/dependabot.yml`):
+    - **Maven** — daily; grouped PRs for Spring Boot, Mongock, Testcontainers and other minor/patch updates; Spring
+      Boot major upgrades are ignored (manual migration).
+    - **GitHub Actions** — daily, all action bumps grouped into a single PR.
+    - **Docker Compose** — weekly check of the MongoDB image in `compose.yaml`.
+    - Conventional commit prefixes (`build(deps)`, `ci(deps)`, `build(docker)`) and labels on every PR.
+
+## Sample Response
 
 ```json
 // 20250119060234
